@@ -1,6 +1,6 @@
-@Operation_Rowdy_Cougar.Api_HostAddress = http://localhost:5192
+@HostAddress = http://localhost:5192
 
-GET {{Operation_Rowdy_Cougar.Api_HostAddress}}/weatherforecast/
+GET {{HostAddress}}/catalog/
 Accept: application/json
 
 ###
