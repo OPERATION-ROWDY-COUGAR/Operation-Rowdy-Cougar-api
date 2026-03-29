@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="Operation-Rowdy-Cougar.Api/Operation-Rowdy-Cougar.Api.csproj" />
   <Project Path="Operation-Rowdy-Cougar.Domain/Operation-Rowdy-Cougar.Domain.csproj" />
+  <Project Path="Operation.Rowdy.Cougar.Data/Operation.Rowdy.Cougar.Data.csproj" />
 </Solution>
