@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Operation-Rowdy-Cougar.Domain\Operation-Rowdy-Cougar.Domain.csproj" />
+    <ProjectReference Include="..\Operation.Rowdy.Cougar.Data\Operation.Rowdy.Cougar.Data.csproj" />
   </ItemGroup>
 
 </Project>
