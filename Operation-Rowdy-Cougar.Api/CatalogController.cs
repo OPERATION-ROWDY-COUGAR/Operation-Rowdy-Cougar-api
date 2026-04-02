@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Operation.Rowdy.Cougar.Domain.Catalog;
 using Operation.Rowdy.Cougar.Data;
 using System.Linq;
@@ -10,23 +11,23 @@ namespace Operation.Rowdy.Cougar.Api.Controllers
     [Route("[controller]")]
     public class CatalogController : ControllerBase
     {
-        private readonly StoreContext _context;
+        private readonly StoreContext _db;
 
-        public CatalogController(StoreContext context)
+        public CatalogController(StoreContext db)
         {
-            _context = context;
+            _db = db;
         }
 
         [HttpGet]
         public IActionResult GetItems()
         {
-            return Ok(_context.Items.ToList());
+            return Ok(_db.Items.ToList());
         }
 
         [HttpGet("{id:int}")]
         public IActionResult GetItem(int id)
         {
-            var item = _context.Items.Find(id);
+            var item = _db.Items.Find(id);
 
             if (item == null)
             {
@@ -39,22 +40,43 @@ namespace Operation.Rowdy.Cougar.Api.Controllers
         [HttpPost]
         public IActionResult Post(Item item)
         {
-            return Created("/catalog/42", item);
+            _db.Items.Add(item);
+            _db.SaveChanges();
+            return Created($"/catalog/{item.Id}", item);
         }
 
         [HttpPost("{id:int}/ratings")]
         public IActionResult PostRating(int id, [FromBody] Rating rating)
         {
-            var item = new Item("Shirt", "Ohio State shirt.", "Nike", 29.99m);
-            item.Id = id;
+            var item = _db.Items.Find(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+
             item.AddRating(rating);
+            _db.SaveChanges();
 
             return Ok(item);
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult Put(int id, Item item)
+        public IActionResult PutItem(int id, [FromBody] Item item)
         {
+            if (id != item.Id)
+            {
+                return BadRequest();
+            }
+
+            if (_db.Items.Find(id) == null)
+            {
+                return NotFound();
+            }
+
+            _db.Entry(item).State = EntityState.Modified;
+            _db.SaveChanges();
+
             return NoContent();
         }
 
