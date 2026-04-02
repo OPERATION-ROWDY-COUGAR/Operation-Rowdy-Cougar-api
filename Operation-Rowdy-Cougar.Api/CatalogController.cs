@@ -21,7 +21,7 @@ namespace Operation.Rowdy.Cougar.Api.Controllers
         [HttpGet]
         public IActionResult GetItems()
         {
-            return Ok(_db.Items.ToList());
+            return Ok(_db.Items);
         }
 
         [HttpGet("{id:int}")]
