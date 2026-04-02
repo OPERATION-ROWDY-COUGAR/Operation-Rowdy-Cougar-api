@@ -10,8 +10,7 @@ builder.Services.AddControllers();
 
 // Add Entity Framework services
 builder.Services.AddDbContext<StoreContext>(options =>
-    options.UseSqlite("Data Source=../Registrar.sqlite",
-    b => b.MigrationsAssembly("Operation.Rowdy.Cougar.Api")));
+    options.UseSqlite("Data Source=../Registrar.sqlite"));
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -22,6 +21,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseSwagger(); 
+    app.UseSwaggerUI();
 }
 
 //app.UseHttpsRedirection();
