@@ -4,6 +4,7 @@ using Operation.Rowdy.Cougar.Domain.Catalog;
 using Operation.Rowdy.Cougar.Data;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Operation.Rowdy.Cougar.Api.Controllers
 {
@@ -81,6 +82,7 @@ namespace Operation.Rowdy.Cougar.Api.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize("delete:catalog")]   
         public IActionResult Delete(int id)
         {
             return NoContent();

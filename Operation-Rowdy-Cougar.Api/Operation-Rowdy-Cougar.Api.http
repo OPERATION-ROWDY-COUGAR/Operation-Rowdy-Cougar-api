@@ -4,3 +4,16 @@ GET {{HostAddress}}/catalog/
 Accept: application/json
 
 ###
+curl --request POST \
+  --url https://dev-2fwr0pqdyftmxfff.us.auth0.com/oauth/token \
+  --header 'content-type: application/json' \
+  --data '{
+    "client_id":"jHggRLwlv02QBBUMGHRZCJ4exCvkez2d",
+    "client_secret":"ZnyFTrJT5YM7gopp2JZLj-78eTxPp4NJAGvHYz2_guBRwocXpj_0OjS2xzjyaqeJ",
+    "audience":"https://operation-rowdy-cougar",
+    "grant_type":"client_credentials"
+  }'
+###
+curl --request DELETE \
+    --url https://localhost:7250?catalog?3 \
+    --header 'authorization" Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJrVjJkV0l5WjN3aG9sT2h1c2hOZz09In0.eyJpc3MiOiJodHRwczovL2Rldi0yZndyMHBqZHlmdG1mZmYudXMuYXV0aDAuY29tLyIsInN1YiI6Ij
